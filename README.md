@@ -1,6 +1,6 @@
 :warning: WORK IN PROGRESS :warning:
 
-# Python Switchboard
+# Switchboard for Python
 
 Switchboard makes working with API's easy. With Switchboard, you can easily convert JSON-objects.
 
