@@ -1,14 +1,16 @@
+"""Exceptions module"""
+
 class SwitchboardException(Exception):
-    pass
+    """Switchboard base exception"""
 
 
 class SwitchboardMissingFieldException(SwitchboardException):
-    pass
+    """Missing field exception"""
 
 
-class SwitchboardWireException(SwitchboardException):
-    pass
+class SwitchboardCordException(SwitchboardException):
+    """Base Cord exception"""
 
 
-class SwitchboardWireValidationException(SwitchboardWireException):
-    pass
+class SwitchboardCordValidationException(SwitchboardCordException):
+    """Cord validation exception"""

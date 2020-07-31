@@ -1,22 +1,34 @@
-from wires import BaseWire
-from exceptions import SwitchboardMissingFieldException
-from diggable import Diggable
-
-EXCLUDE = 0
-INCLUDE = 1
-RAISE = 2
+"""Switchboard module"""
+# pylint: disable=too-few-public-methods
+from .cords import Cord
+from .diggable import Diggable
+from .exceptions import SwitchboardMissingFieldException
 
 
 class Switchboard:
-    OPTIONS_CLASS = "Meta"
-    _options = None
+    """Switchboard objects helps converting JSON schemas.
+    Switchboard consists of cords that can define how data
+    list moved from schema to schema.
+    """
 
-    def __init__(self):
-        self._options = {"missing": INCLUDE, **self._get_options()}
+    OPTIONS_CLASS = "Meta"
+
+    # Missing data options
+    EXCLUDE = "EXCLUDE"
+    INCLUDE = "INCLUDE"
+    RAISE = "RAISE"
+
+    # Attributes
+    _options = None
+    _many = None
+
+    def __init__(self, many=False):
+        self._many = many
+        self._options = {"missing": self.INCLUDE, **self._get_options()}
 
     def _get_options(self):
         _options = {}
-        _meta = getattr(self, self.OPTIONS_CLASS)
+        _meta = getattr(self, self.OPTIONS_CLASS, None)
 
         for attr_name in dir(_meta):
             if not attr_name.startswith("__"):
@@ -24,29 +36,38 @@ class Switchboard:
 
         return _options
 
-    def _get_wires(self):
-        _wires = {}
+    def _get_cords(self):
+        _cords = {}
         for attr_name in dir(self):
             attr = getattr(self, attr_name)
-            if isinstance(attr, BaseWire):
-                _wires[attr_name] = attr
-        return _wires
+            if isinstance(attr, Cord):
+                _cords[attr_name] = attr
+        return _cords
 
-    def apply(self, data):
+    def _apply_for_object(self, data):
         new_data = {}
         diggable = Diggable(data)
 
-        for wire_name, wire_inst in self._get_wires().items():
-            value, is_found = wire_inst.dig(diggable)
+        for cord_name, cord_inst in self._get_cords().items():
+            value, is_found = cord_inst.apply(diggable)
 
-            if not is_found and self._options["missing"] is EXCLUDE:
+            if not is_found and self._options["missing"] is self.EXCLUDE:
                 continue
 
-            if not is_found and self._options["missing"] is RAISE:
+            if not is_found and self._options["missing"] is self.RAISE:
                 raise SwitchboardMissingFieldException(
-                    f'Field "{wire_name}" is missing'
+                    f'Field "{cord_name}" is missing'
                 )
 
-            new_data[wire_name] = value
+            new_data[cord_name] = value
 
         return new_data
+
+    def apply(self, data):
+        """Switchboard is applied via this method.
+        """
+
+        if self._many:
+            return list(map(self._apply_for_object, data))
+
+        return self._apply_for_object(data)

@@ -1,7 +1,13 @@
-from exceptions import SwitchboardWireValidationException
-from diggable import DiggableFieldNotFoundException
+# pylint: disable=too-few-public-methods
+"""Cord module"""
 
-class BaseWire:
+from .diggable import DiggableFieldNotFoundException
+from .exceptions import SwitchboardCordValidationException
+
+
+class Cord:
+    """Schema fields can be linked using Cord objects"""
+
     _source = None
     _default = None
     _required = None
@@ -11,7 +17,9 @@ class BaseWire:
         self._default = default
         self._required = required
 
-    def dig(self, diggable):
+    def apply(self, diggable):
+        """Cord is applied via this method.
+        """
 
         try:
             result = diggable.dig(*self._source)
@@ -20,12 +28,8 @@ class BaseWire:
         except DiggableFieldNotFoundException:
 
             if self._required:
-                raise SwitchboardWireValidationException(
+                raise SwitchboardCordValidationException(
                     f'Required field "{self._source}" is missing'
                 )
 
             return self._default, False
-
-
-class StreamWire(BaseWire):
-    pass

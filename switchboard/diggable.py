@@ -3,7 +3,7 @@ import json
 
 
 class DiggableFieldNotFoundException(Exception):
-    pass
+    """Field not found exception"""
 
 
 class Diggable:
