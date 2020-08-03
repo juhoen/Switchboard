@@ -1,5 +1,6 @@
 # Switchboard for Python
 
+[![PyPI](https://img.shields.io/pypi/v/python-switchboard?label=python-switchboard)](https://pypi.org/project/python-switchboard/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Switchboard makes working with API's easy. Switchboard helps you can easily convert JSON schemas. Switchboard is still work on progress, but you are more than welcome to check it out!
