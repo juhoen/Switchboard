@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="Switchboard",
+    name="python-switchboard",
     version="0.0.1",
     author="Juho Enala",
     author_email="juho.enala@gmail.com",
