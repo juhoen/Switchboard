@@ -56,12 +56,12 @@ data = {
 Unfortunately, the solution above becomes extremely messy when working with nested JSON structures, multiple 3rd party API's, or combination of them. This is why Switchboard is useful. By defining a new switchboard, you can easily manage data mappings between different schemas.
 
 ```py
-from switchboard import Switchboard, Wire
+from switchboard import Switchboard, Cord
 
 class UserSwitchboard(Switchboard):
-    first_name = Wire("firstName")
-    last_name = Wire("lastName")
-    email = Wire(["contactInfo", "primaryEmail"])  # Notice how simple it is to access nested data!
+    first_name = Cord("firstName")
+    last_name = Cord("lastName")
+    email = Cord(["contactInfo", "primaryEmail"])  # Notice how simple it is to access nested data!
 ```
 
 The code looks much better now. Nice!
