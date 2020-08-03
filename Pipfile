@@ -14,9 +14,9 @@ deploy = "twine upload dist/*"
 black = "*"
 twine = "*"
 isort = "*"
+pre-commit = "*"
 
 [packages]
-pre-commit = "*"
 
 [requires]
 python_version = "3.8"
