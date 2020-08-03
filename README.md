@@ -3,7 +3,13 @@
 [![PyPI](https://img.shields.io/pypi/v/python-switchboard?label=python-switchboard)](https://pypi.org/project/python-switchboard/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Switchboard makes working with API's easy. Switchboard helps you can easily convert JSON schemas. Switchboard is still work on progress, but you are more than welcome to check it out!
+Switchboard makes working with API's easy. Switchboard helps you can easily convert JSON schemas. By creating a switchboard and defining some cords, you can manage which fields of the old schema implies to which fields in the new schema.
+
+The name Switchboard is an association of old time telephone operators. By using the Switchboard, you act as the operator. Linking schema fields to each other resembles a telephone operator's switchboard.
+
+![Switchboard operator](https://live.staticflickr.com/7178/7120934237_e7e2e07eeb_c.jpg)
+
+*Photo by [Gawler History](https://www.flickr.com/photos/gawler_history/)*
 
 ## Install Switchboard
 
