@@ -2,14 +2,9 @@
 
 [![PyPI](https://img.shields.io/pypi/v/python-switchboard?label=python-switchboard)](https://pypi.org/project/python-switchboard/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 Switchboard makes working with API's easy. Switchboard helps you can easily convert JSON schemas. Switchboard is still work on progress, but you are more than welcome to check it out!
-
-## Install Switchboard
-
-```sh
-$ pip install python-switchboard
-```
 
 ## But why Switchboard?
 
@@ -24,20 +19,20 @@ When working with integrations and 3rd party API's, for instance, you often run 
 
 ```
 
-However, you are working with 3rd party user API, which returns the following kind of payload:
+You are working with 3rd party user API, for instance, which returns the following kind of payload:
 
 ```json
 {
-    "id": 12335,
-    "firstName": "John",
-    "lastName": "Doe",
-    "contactInfo": {
-        "primaryEmail": "john.doe@foo.bar"
-    }
+  "id": 12335,
+  "firstName": "John",
+  "lastName": "Doe",
+  "contactInfo": {
+    "primaryEmail": "john.doe@foo.bar"
+  }
 }
 ```
 
-So, what now? What's the best way to convert payload into your format? Does this look familiar:
+So, what to do now? What is the best way to convert payload into your own format? Does this look familiar:
 
 ```py
 response_dict = json.loads(response.body)
@@ -49,7 +44,7 @@ data = {
 }
 ```
 
-Unfortunately, the solution above becomes extremely messy when working with nested JSON structures, multiple 3rd party API's, or combination of them. This is why Switchboard is useful. By defining a new switchboard, you can easily manage data mappings between different schemas.
+Unfortunately, the solution above becomes extremely messy when working with nested JSON structures, multiple 3rd party API's, or combination of them. This is why Switchboard is useful, by defining a new switchboard, you can easily manage data mappings between differen schemas.
 
 ```py
 from switchboard import Switchboard, Wire
@@ -60,7 +55,7 @@ class UserSwitchboard(Switchboard):
     email = Wire(["contactInfo", "primaryEmail"])  # Notice how simple it is to access nested data!
 ```
 
-The code looks much better now. Nice!
+Now, the code looks much better. Nice!
 
 ```py
 response_dict = json.loads(response.body)
@@ -69,9 +64,9 @@ data = UserSwitchboard().apply(response_dict)
 
 ## Documentation
 
-_Switchboard is still in progress. Better documentation is coming later._
+_This project is still in progress. Better documentation is coming later._
 
-Defining new Switchboards is easy. All you need to do is to import `Switchboard`, and define some `Cord`s.
+Defining new Switchboards is easy. All you need to do is to import it, and define some chords.
 
 ```py
 from switchboard import Switchboard, Cord
@@ -86,7 +81,7 @@ class MySwitchboard(Switchboard):
 
 ### Meta class
 
-Switchboard's functionality can be tweaked using Meta class:
+Switchboard functionality can be tweaked using Meta class:
 
 ```py
 from switchboard import Switchboard, Cord

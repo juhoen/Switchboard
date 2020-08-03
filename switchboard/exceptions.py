@@ -1,5 +1,6 @@
 """Exceptions module"""
 
+
 class SwitchboardException(Exception):
     """Switchboard base exception"""
 

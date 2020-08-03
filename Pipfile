@@ -4,15 +4,19 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [scripts]
-test="python -m unittest discover tests"
-build="python setup.py sdist bdist_wheel"
-deploy="twine upload dist/*"
+test = "python -m unittest discover tests"
+format = "pre-commit run"
+format-all = "pre-commit run --all-files"
+build = "python setup.py sdist bdist_wheel"
+deploy = "twine upload dist/*"
 
 [dev-packages]
 black = "*"
 twine = "*"
+isort = "*"
 
 [packages]
+pre-commit = "*"
 
 [requires]
 python_version = "3.8"

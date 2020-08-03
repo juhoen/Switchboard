@@ -1,0 +1,38 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+default_language_version:
+  python: python3.7
+repos:
+  # Ensure that Black is being used
+  - repo: local
+    hooks:
+      - id: black
+        name: black
+        entry: black
+        language: system
+        types: [python]
+
+  # Ensure that imports are sorted using isort
+  - repo: https://github.com/timothycrosley/isort
+    rev: "5.0.6"
+    hooks:
+      - id: isort
+
+  # Apply Prettier to format .md, .json, .yaml etcz
+  - repo: https://github.com/prettier/prettier
+    rev: "2.0.5"
+    hooks:
+      - id: prettier
+        name: prettier
+        entry: prettier
+        args: [--write]
+
+  # Ensure that there is no linter errors
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        args: [--score=no]
