@@ -137,6 +137,6 @@ data_in = [
 ]
 
 MySwitchboard(many=True).apply(data_in)
-# > { "target": 1, "target": 2, "target": 3, "target": 4 }
+# > [{ "target": 1 }, { "target": 2 }, { "target": 3 }, {"target": 4 }]
 
 ```
