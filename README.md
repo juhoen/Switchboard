@@ -5,6 +5,12 @@
 
 Switchboard makes working with API's easy. Switchboard helps you can easily convert JSON schemas. Switchboard is still work on progress, but you are more than welcome to check it out!
 
+## Install Switchboard
+
+```sh
+$ pip install python-switchboard
+```
+
 ## But why Switchboard?
 
 When working with integrations and 3rd party API's, for instance, you often run into situation where the data must be digged manually. Let us consider that you have the following kind of simple database schema:
@@ -18,7 +24,7 @@ When working with integrations and 3rd party API's, for instance, you often run 
 
 ```
 
-You are working with 3rd party user API, for instance, which returns the following kind of payload:
+However, you are working with 3rd party user API, which returns the following kind of payload:
 
 ```json
 {
@@ -31,7 +37,7 @@ You are working with 3rd party user API, for instance, which returns the followi
 }
 ```
 
-So, what to do now? What is the best way to convert payload into your own format? Does this look familiar:
+So, what now? What's the best way to convert payload into your format? Does this look familiar:
 
 ```py
 response_dict = json.loads(response.body)
@@ -43,7 +49,7 @@ data = {
 }
 ```
 
-Unfortunately, the solution above becomes extremely messy when working with nested JSON structures, multiple 3rd party API's, or combination of them. This is why Switchboard is useful, by defining a new switchboard, you can easily manage data mappings between differen schemas.
+Unfortunately, the solution above becomes extremely messy when working with nested JSON structures, multiple 3rd party API's, or combination of them. This is why Switchboard is useful. By defining a new switchboard, you can easily manage data mappings between different schemas.
 
 ```py
 from switchboard import Switchboard, Wire
@@ -54,7 +60,7 @@ class UserSwitchboard(Switchboard):
     email = Wire(["contactInfo", "primaryEmail"])  # Notice how simple it is to access nested data!
 ```
 
-Now, the code looks much better. Nice!
+The code looks much better now. Nice!
 
 ```py
 response_dict = json.loads(response.body)
@@ -63,9 +69,9 @@ data = UserSwitchboard().apply(response_dict)
 
 ## Documentation
 
-_This project is still in progress. Better documentation is coming later._
+_Switchboard is still in progress. Better documentation is coming later._
 
-Defining new Switchboards is easy. All you need to do is to import it, and define some chords.
+Defining new Switchboards is easy. All you need to do is to import `Switchboard`, and define some `Cord`s.
 
 ```py
 from switchboard import Switchboard, Cord
@@ -80,7 +86,7 @@ class MySwitchboard(Switchboard):
 
 ### Meta class
 
-Switchboard functionality can be tweaked using Meta class:
+Switchboard's functionality can be tweaked using Meta class:
 
 ```py
 from switchboard import Switchboard, Cord
