@@ -5,9 +5,12 @@ verify_ssl = true
 
 [scripts]
 test="python -m unittest discover tests"
+build="python setup.py sdist bdist_wheel"
+deploy="twine upload dist/*"
 
 [dev-packages]
 black = "*"
+twine = "*"
 
 [packages]
 
