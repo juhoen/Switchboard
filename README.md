@@ -4,7 +4,11 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-Switchboard makes working with API's easy. Switchboard helps you can easily convert JSON schemas. Switchboard is still work on progress, but you are more than welcome to check it out!
+Switchboard makes working with API's easy. Switchboard helps you can easily convert JSON schemas. By creating a switchboard and defining some cords, you can manage which fields of the old schema implies to which fields in the new schema.
+
+![Switchboard operator](https://live.staticflickr.com/7178/7120934237_e7e2e07eeb_c.jpg)
+
+The name Switchboard is an association of old time telephone operators. By using the Switchboard, you act as the operator. Linking schema fields to each other resembles a telephone operator's switchboard. Photo by [Gawler History](https://www.flickr.com/photos/gawler_history/).
 
 ## But why Switchboard?
 
@@ -47,12 +51,12 @@ data = {
 Unfortunately, the solution above becomes extremely messy when working with nested JSON structures, multiple 3rd party API's, or combination of them. This is why Switchboard is useful, by defining a new switchboard, you can easily manage data mappings between differen schemas.
 
 ```py
-from switchboard import Switchboard, Wire
+from switchboard import Switchboard, Cord
 
 class UserSwitchboard(Switchboard):
-    first_name = Wire("firstName")
-    last_name = Wire("lastName")
-    email = Wire(["contactInfo", "primaryEmail"])  # Notice how simple it is to access nested data!
+    first_name = Cord("firstName")
+    last_name = Cord("lastName")
+    email = Cord(["contactInfo", "primaryEmail"])  # Notice how simple it is to access nested data!
 ```
 
 Now, the code looks much better. Nice!
